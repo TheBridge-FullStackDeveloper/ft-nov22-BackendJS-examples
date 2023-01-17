@@ -5,7 +5,7 @@ const booksController = require ('../controllers/booksController')
 // CRUD --> CREATE, READ, UPDATE, DELETE
 
 // http://localhost:3000/books
-// CREATE - crear un libro
+// CREATE - crear un libroo
 
 // JSON del libro a enviar a POST /books
 /*
