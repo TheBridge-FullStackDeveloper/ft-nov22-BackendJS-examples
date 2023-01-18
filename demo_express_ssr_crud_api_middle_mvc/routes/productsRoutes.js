@@ -1,5 +1,5 @@
 const express = require('express')
-const fetch = require('node-fetch')
+const productsController = require("../controllers/productsController");
 
 const productsRouter = express.Router();
 
@@ -7,26 +7,7 @@ const productsRouter = express.Router();
 // GET http://localhost:3000/products/3
 // GET http://localhost:3000/products/4
 // GET http://localhost:3000/products
-productsRouter.get('/:id?', async (req, res) => {
-    if (req.params.id) { // con ID
-        try {
-            let response = await fetch(`https://fakestoreapi.com/products/${req.params.id}`); //{}
-            let products = await response.json(); //{}
-            res.render('products', { "products": [products] }); // Pinta datos en el pug
-        }
-        catch (error) {
-            console.log(`ERROR: ${error.stack}`);
-        }
-    } else { // sin ID --> TODOS los products
-        try {
-            let response = await fetch(`https://fakestoreapi.com/products`); // []
-            let products = await response.json(); // []
-            res.render('products', { products }); // Pinta datos en el pug
-        }
-        catch (error) {
-            console.log(`ERROR: ${error.stack}`);
-        }
-    }
-});
+// /products
+productsRouter.get('/:id?',productsController.getProducts);
 
 module.exports = productsRouter;
