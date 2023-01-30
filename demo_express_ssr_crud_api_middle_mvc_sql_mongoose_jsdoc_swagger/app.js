@@ -5,6 +5,10 @@ require('./utils/db_mongo'); // conectarse a la BBDD Mongo
 const calculator = require('./utils/calculator')
 const error404 = require('./middlewares/error404')
 
+//Swagger 
+const swaggerUi = require('swagger-ui-express');//Requiere libreria de Swagger (La UI)
+const swaggerDocument = require('./swagger.json'); //Requiere ruta relativa del json que contiene la documentación de la API
+
 // Módulos de Rutas
 const booksRoutes = require('./routes/booksRoutes')
 const productsRoutes = require('./routes/productsRoutes')
@@ -22,6 +26,8 @@ app.set('views', './views');
 app.use(express.json()); // Habilitar tipo de dato a recibir
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'))
+
+app.use('/documentassion', swaggerUi.serve, swaggerUi.setup(swaggerDocument));//Endpoint que servirá la documentación en el navegador, se le pasa la variable que apunta al .json que contiene la documentación
 
 app.get('/', (req, res) => {
     const calc = calculator.add(2, 2);
